@@ -52,3 +52,4 @@
 2025-02-05T12:58:38  ci(report): load rules lazily for faster startup
 2025-02-15T19:15:45  feat(deps): short-circuit on first critical
 2025-03-16T14:32:52  chore(format): make timestamps timezone-aware
+2025-03-26T09:49:59  refactor(cli): skip binary files by sniffing

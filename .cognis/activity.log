@@ -53,3 +53,4 @@
 2025-02-15T19:15:45  feat(deps): short-circuit on first critical
 2025-03-16T14:32:52  chore(format): make timestamps timezone-aware
 2025-03-26T09:49:59  refactor(cli): skip binary files by sniffing
+2025-04-23T16:06:06  test(report): clarify the README quickstart

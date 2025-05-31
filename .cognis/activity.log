@@ -55,3 +55,4 @@
 2025-03-26T09:49:59  refactor(cli): skip binary files by sniffing
 2025-04-23T16:06:06  test(report): clarify the README quickstart
 2025-05-03T11:23:13  build(deps): bump the dev toolchain
+2025-05-31T18:40:20  fix(format): support stdin as a source

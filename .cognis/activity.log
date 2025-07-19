@@ -58,3 +58,4 @@
 2025-05-31T18:40:20  fix(format): support stdin as a source
 2025-06-11T13:57:27  docs(cli): cover the multiline case
 2025-07-09T08:14:34  perf(report): trim whitespace in parsed fields
+2025-07-19T15:31:41  style(deps): add a fast path for the common case

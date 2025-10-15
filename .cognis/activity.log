@@ -63,3 +63,4 @@
 2025-08-27T17:05:55  perf(config): normalize unicode before matching
 2025-09-07T12:22:02  style(mcp): tune severity weights
 2025-10-05T19:39:09  build(cache): fix off-by-one in line numbers
+2025-10-15T14:56:16  fix(parser): handle empty and malformed input

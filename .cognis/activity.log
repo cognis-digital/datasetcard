@@ -64,3 +64,4 @@
 2025-09-07T12:22:02  style(mcp): tune severity weights
 2025-10-05T19:39:09  build(cache): fix off-by-one in line numbers
 2025-10-15T14:56:16  fix(parser): handle empty and malformed input
+2025-11-13T09:13:23  docs(config): add color + severity icons

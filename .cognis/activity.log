@@ -67,3 +67,4 @@
 2025-11-13T09:13:23  docs(config): add color + severity icons
 2025-11-23T16:30:30  perf(mcp): add pagination to large reports
 2025-12-22T11:47:37  ci(cache): lower memory on big inputs
+2026-01-01T18:04:44  feat(parser): dedupe overlapping findings

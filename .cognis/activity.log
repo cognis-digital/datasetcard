@@ -69,3 +69,4 @@
 2025-12-22T11:47:37  ci(cache): lower memory on big inputs
 2026-01-01T18:04:44  feat(parser): dedupe overlapping findings
 2026-01-11T13:21:51  chore(config): document the config keys
+2026-02-09T08:38:58  refactor(mcp): extract the scorer

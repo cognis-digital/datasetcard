@@ -75,3 +75,4 @@
 2026-03-29T17:29:19  refactor(format): add --fail-on threshold handling
 2026-04-26T12:46:26  test(cli): assert exit codes in tests
 2026-05-07T19:03:33  ci(report): add type hints to the public API
+2026-06-04T14:20:40  feat(deps): reduce false positives on edge cases

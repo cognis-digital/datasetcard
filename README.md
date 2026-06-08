@@ -36,9 +36,11 @@ ML data governance
 <a name="features"></a>
 ## Features
 
-- ✅ Todo
-- ✅ Fixme
-- ✅ Xxx
+- ✅ Sha256 File
+- ✅ Profile Dataset
+- ✅ Build Croissant
+- ✅ Build Card Markdown
+- ✅ Build Datasheet
 - ✅ Runs on Linux/macOS/Windows · Docker · devcontainer
 - ✅ Ports in Python, JavaScript, Go, and Rust (`ports/`)
 

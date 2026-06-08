@@ -1,0 +1,9 @@
+user_id,email,age,score,signup_date,active
+1,alice@example.com,34,0.82,2024-01-15,true
+2,bob@example.com,28,0.41,2024-02-03,false
+3,carol@example.com,45,0.95,2024-02-20,true
+4,dave@example.com,52,0.33,2024-03-11,true
+5,erin@example.com,23,,2024-03-28,false
+6,frank@example.com,38,0.67,2024-04-02,true
+7,grace@example.com,41,0.74,2024-04-19,false
+8,heidi@example.com,29,0.58,2024-05-05,true

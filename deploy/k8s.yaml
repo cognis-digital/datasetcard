@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: datasetcard, labels: { app: datasetcard } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: datasetcard } }
+  template:
+    metadata: { labels: { app: datasetcard } }
+    spec:
+      containers:
+        - name: datasetcard
+          image: ghcr.io/cognis-digital/datasetcard:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: datasetcard }
+spec:
+  selector: { app: datasetcard }
+  ports: [{ port: 80, targetPort: 8000 }]

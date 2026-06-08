@@ -1,27 +1,11 @@
-"""datasetcard - Auto Dataset Cards / datasheets with Croissant + provenance.
-
-Generate ML data governance documentation (HuggingFace-style dataset cards)
-from tabular data files using only the Python standard library.
-"""
-from .core import (
-    DatasetProfile,
-    profile_dataset,
-    build_croissant,
-    build_card_markdown,
-    build_datasheet,
-    sha256_file,
-)
-
-TOOL_NAME = "datasetcard"
-TOOL_VERSION = "1.0.0"
-
-__all__ = [
-    "DatasetProfile",
-    "profile_dataset",
-    "build_croissant",
-    "build_card_markdown",
-    "build_datasheet",
-    "sha256_file",
-    "TOOL_NAME",
-    "TOOL_VERSION",
-]
+"""datasetcard — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from datasetcard.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from datasetcard.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "datasetcard"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION

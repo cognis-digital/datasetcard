@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/datasetcard",
+  "version": "0.2.0",
+  "description": "JavaScript port of datasetcard (Cognis Neural Suite)",
+  "bin": {
+    "datasetcard": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}

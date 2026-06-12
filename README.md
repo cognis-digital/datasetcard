@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-datasetcard
+pip install "git+https://github.com/cognis-digital/datasetcard.git"
 datasetcard scan .            # → prioritized findings in seconds
 ```
 
@@ -50,7 +50,7 @@ ML data governance
 ## Quick start
 
 ```bash
-pip install cognis-datasetcard
+pip install "git+https://github.com/cognis-digital/datasetcard.git"
 datasetcard --version
 datasetcard scan .                       # scan current project
 datasetcard scan . --format json         # machine-readable

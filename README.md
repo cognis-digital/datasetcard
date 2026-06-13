@@ -20,6 +20,41 @@ pip install cognis-datasetcard
 datasetcard scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+1. Install the CLI (Python 3.9+):
+
+   ```bash
+   pip install datasetcard    # or: pip install .   from a checkout
+   ```
+
+2. Profile a dataset — the `profile` subcommand reports rows, columns, per-column types, missing %, uniqueness, a SHA-256, and PII flags for a CSV/TSV/JSONL file:
+
+   ```bash
+   datasetcard profile data.csv
+   ```
+
+3. Generate documentation artifacts from the same input:
+
+   ```bash
+   datasetcard card data.csv --name my-dataset > DATASET_CARD.md   # HuggingFace-style card
+   datasetcard datasheet data.csv > DATASHEET.md                   # Datasheets-for-Datasets skeleton
+   datasetcard croissant data.csv --format json > croissant.jsonld # Croissant JSON-LD metadata
+   ```
+
+4. Read the profile programmatically with the global `--format json` flag (note: it precedes the subcommand):
+
+   ```bash
+   datasetcard --format json profile data.csv | jq '.pii_flags'
+   ```
+
+5. Regenerate the card in CI so documentation tracks the data:
+
+   ```bash
+   datasetcard card data.csv > DATASET_CARD.md && git diff --exit-code DATASET_CARD.md
+   ```
+
+
 ## Contents
 
 - [Why datasetcard?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)

@@ -1,6 +1,7 @@
-"""DATASETCARD MCP server — exposes scan() as an MCP tool for Cognis.Studio."""
+"""DATASETCARD MCP server — exposes profile() as an MCP tool for Cognis.Studio."""
 from __future__ import annotations
-from datasetcard.core import scan, to_json
+import json
+
 
 def serve() -> int:
     """Start an MCP stdio server. Requires the optional 'mcp' extra:
@@ -11,12 +12,17 @@ def serve() -> int:
     except Exception:
         print("Install the MCP extra: pip install 'cognis-datasetcard[mcp]'")
         return 1
+    from datasetcard.core import profile_dataset, build_croissant
     app = FastMCP("datasetcard")
 
     @app.tool()
     def datasetcard_scan(target: str) -> str:
-        """Auto Dataset Cards / datasheets with Croissant + provenance. Returns JSON findings."""
-        return to_json(scan(target))
+        """Dataset Cards / datasheets with Croissant + provenance. Returns JSON."""
+        try:
+            profile = profile_dataset(target)
+            return json.dumps(build_croissant(profile), indent=2, default=str)
+        except (FileNotFoundError, ValueError) as exc:
+            return json.dumps({"error": str(exc)})
 
     app.run()
     return 0

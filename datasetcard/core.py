@@ -15,6 +15,11 @@ import statistics
 from dataclasses import dataclass, field, asdict
 from typing import Any
 
+TOOL_NAME = "datasetcard"
+TOOL_VERSION = "0.1.0"
+
+_SUPPORTED_EXTENSIONS = frozenset({".csv", ".tsv", ".jsonl", ".ndjson"})
+
 _INT_RE = re.compile(r"^[+-]?\d+$")
 _FLOAT_RE = re.compile(r"^[+-]?(\d+\.\d*|\.\d+|\d+)([eE][+-]?\d+)?$")
 _BOOL_VALUES = {"true", "false", "yes", "no", "0", "1", "t", "f"}
@@ -139,25 +144,48 @@ def _detect_pii(col_name: str, samples: list) -> list:
 def _read_rows(path: str) -> tuple:
     """Return (header, rows, file_format). rows is list of list[str]."""
     ext = os.path.splitext(path)[1].lower()
-    with open(path, "r", encoding="utf-8", newline="") as fh:
-        text = fh.read()
+    if ext not in _SUPPORTED_EXTENSIONS:
+        raise ValueError(
+            f"unsupported file extension {ext!r}; expected one of: "
+            + ", ".join(sorted(_SUPPORTED_EXTENSIONS))
+        )
+    try:
+        with open(path, "r", encoding="utf-8", newline="") as fh:
+            text = fh.read()
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"file is not valid UTF-8: {path}") from exc
     if ext in (".jsonl", ".ndjson"):
         records = []
-        keys = []
-        for line in text.splitlines():
-            line = line.strip()
-            if not line:
+        keys: list = []
+        for lineno, raw in enumerate(text.splitlines(), 1):
+            raw = raw.strip()
+            if not raw:
                 continue
-            obj = json.loads(line)
+            try:
+                obj = json.loads(raw)
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"malformed JSON on line {lineno} of {path}: {exc}"
+                ) from exc
+            if not isinstance(obj, dict):
+                raise ValueError(
+                    f"expected a JSON object on line {lineno} of {path}, "
+                    f"got {type(obj).__name__}"
+                )
             for k in obj:
                 if k not in keys:
                     keys.append(k)
             records.append(obj)
-        rows = [["" if r.get(k) is None else str(r.get(k, "")) for k in keys] for r in records]
+        if not records:
+            return [], [], "jsonl"
+        rows = [
+            ["" if r.get(k) is None else str(r.get(k, "")) for k in keys]
+            for r in records
+        ]
         return keys, rows, "jsonl"
     delimiter = "\t" if ext == ".tsv" else ","
     reader = csv.reader(io.StringIO(text), delimiter=delimiter)
-    all_rows = [r for r in reader]
+    all_rows = list(reader)
     if not all_rows:
         return [], [], "csv" if delimiter == "," else "tsv"
     header = all_rows[0]
@@ -165,9 +193,15 @@ def _read_rows(path: str) -> tuple:
     return header, rows, ("csv" if delimiter == "," else "tsv")
 
 
-def profile_dataset(path: str, name: str = None, max_samples: int = 3) -> DatasetProfile:
+def profile_dataset(
+    path: str, name: str = None, max_samples: int = 3
+) -> DatasetProfile:
     if not os.path.isfile(path):
         raise FileNotFoundError(f"input file not found: {path}")
+    if not isinstance(max_samples, int) or max_samples < 0:
+        raise ValueError(
+            f"max_samples must be a non-negative integer, got {max_samples!r}"
+        )
     header, rows, fmt = _read_rows(path)
     if not header:
         raise ValueError(f"no columns detected in {path}")

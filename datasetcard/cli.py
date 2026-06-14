@@ -107,9 +107,12 @@ def main(argv=None) -> int:
                     print(f"_{body['question']}_")
                     print(body["answer"])
                     print()
-    except (FileNotFoundError, ValueError) as exc:
+    except FileNotFoundError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
     except Exception as exc:  # pragma: no cover - defensive
         print(f"unexpected error: {exc}", file=sys.stderr)
         return 2

@@ -1,11 +1,11 @@
 """datasetcard — part of the Cognis Neural Suite."""
-try:  # re-export the tool's public API + identity from core
-    from datasetcard.core import *  # noqa: F401,F403
-except Exception:  # pragma: no cover
-    pass
-try:
-    from datasetcard.core import TOOL_NAME, TOOL_VERSION
-except Exception:  # pragma: no cover
-    TOOL_NAME = "datasetcard"
-    TOOL_VERSION = "0.1.0"
+from datasetcard.core import (  # noqa: F401
+    TOOL_NAME,
+    TOOL_VERSION,
+    profile_dataset,
+    build_croissant,
+    build_card_markdown,
+    build_datasheet,
+)
+
 __version__ = TOOL_VERSION

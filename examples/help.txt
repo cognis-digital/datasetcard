@@ -1,0 +1,19 @@
+$ datasetcard-emit --help
+
+usage: datasetcard [-h] [--version] [--format {table,json}]
+                   {profile,croissant,card,datasheet} ...
+
+Auto-generate dataset cards, Croissant metadata, and datasheets.
+
+positional arguments:
+  {profile,croissant,card,datasheet}
+    profile             profile a dataset file
+    croissant           emit Croissant JSON-LD metadata
+    card                emit a HuggingFace-style dataset card (markdown)
+    datasheet           emit a Datasheets-for-Datasets skeleton
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)

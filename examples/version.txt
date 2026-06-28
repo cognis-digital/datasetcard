@@ -1,0 +1,3 @@
+$ datasetcard-emit --version
+
+datasetcard 0.1.0

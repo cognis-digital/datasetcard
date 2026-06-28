@@ -20,6 +20,69 @@ pip install cognis-datasetcard
 datasetcard scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ datasetcard-emit --version
+datasetcard 0.1.0
+```
+
+```console
+$ datasetcard-emit --help
+usage: datasetcard [-h] [--version] [--format {table,json}]
+                   {profile,croissant,card,datasheet} ...
+
+Auto-generate dataset cards, Croissant metadata, and datasheets.
+
+positional arguments:
+  {profile,croissant,card,datasheet}
+    profile             profile a dataset file
+    croissant           emit Croissant JSON-LD metadata
+    card                emit a HuggingFace-style dataset card (markdown)
+    datasheet           emit a Datasheets-for-Datasets skeleton
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)
+```
+
+> Blocks above are real `datasetcard` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"actor": "John Doe",
+"incident_id": "1234567890",
+"reporter": "Jane Smith",
+"timestamp": 1643723400,
+"findings": [
+    {
+        "id": "finding-1",
+        "type": "indicator",
+        "name": "Suspicious Domain",
+        "description": "Domain used for phishing attacks",
+        "url": "https://example.com/phishing"
+    },
+    {
+        "id": "finding-2",
+        "type": "malware",
+        "name": "Ransomware",
+        "description": "Malware that encrypts files",
+        "hash": "abc123"
+    }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 1. Install the CLI (Python 3.9+):
